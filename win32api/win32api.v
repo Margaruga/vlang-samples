@@ -65,7 +65,10 @@ pub fn get_pids() ?[]u32 {
 pub fn get_version() string {
 	mut info := OSVERSIONINFO{}
 	info.dw_os_version_info_size = sizeof(info)
-	result := C.GetVersionExW(&info)
+	res := C.GetVersionExW(&info)
+	if !res {
+		return error(get_error_msg(int(C.GetLastError())))
+	}
 	return "Version: $info.dw_major_version, $info.dw_minor_version, $info.dw_build_number"
 }
 
