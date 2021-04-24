@@ -38,12 +38,12 @@ pub fn hostname() string {
 	if !res {
 		return error(get_error_msg(int(C.GetLastError())))
 	}
-	return string_from_wide(&hostname[0])
+	return unsafe { string_from_wide(&hostname[0]) }
 }
 
 pub fn get_commandline() string {
 	cmdline := C.GetCommandLineW()
-	return string_from_wide(cmdline)
+	return unsafe { string_from_wide(cmdline) }
 }
 
 pub fn get_pids() ?[]u32 {
