@@ -77,6 +77,6 @@ fn main() {
 	println(hostname())
 	println(get_commandline())
 	println(get_version())
-	pids := get_pids() or { []u32 }
+	pids := get_pids() or { []u32{} }
 	println(pids.len)
 }
